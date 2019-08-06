@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Hangfire;
 using Hangfire.SqlServer;
 using System;
+using BackgroundJobTest.Core;
 
 namespace JobServer1
 {
@@ -37,7 +38,7 @@ namespace JobServer1
                 }));
             services.AddHangfireServer();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddSingleton<IOffenderManager, OffenderManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

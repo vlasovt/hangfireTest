@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackgroundJobTest.Core;
 using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
@@ -43,11 +44,11 @@ namespace JobServer2
                 }));
             services.AddHangfireServer();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddSingleton<IOffenderManager, OffenderManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IBackgroundJobClient backgroundJobs)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IBackgroundJobClient backgroundJobs, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -58,7 +59,6 @@ namespace JobServer2
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
             app.UseHangfireDashboard();
             var options = new BackgroundJobServerOptions
             {

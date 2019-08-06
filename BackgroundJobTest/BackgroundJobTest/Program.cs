@@ -1,4 +1,5 @@
 ﻿using System;
+using BackgroundJobTest.Core;
 using Hangfire;
 
 namespace BackgroundJobTest
@@ -16,13 +17,14 @@ namespace BackgroundJobTest
 
             //BackgroundJob.Enqueue(() => Console.WriteLine("Hello, world!"));
 
-            for(int i = 0; i < 10000000; i++)
-            {
-                BackgroundJob.Schedule(() => Console.WriteLine("Hello, world " + i), TimeSpan.FromSeconds(i + 1));
-            }
+            //for(int i = 0; i < 50; i++)
+            //{
+            //    BackgroundJob.Schedule(() => Console.WriteLine("Hello, world " + i), TimeSpan.FromSeconds(i + 1));
+            //}
 
+            BackgroundJob.Enqueue<IOffenderManager>(ms => ms.CreateNewOffender());
 
-            RecurringJob.AddOrUpdate(() => Console.WriteLine("Daily job"), Cron.Daily(18, 55));
+            //RecurringJob.AddOrUpdate(() => Console.WriteLine("Daily job"), Cron.Daily(18, 55));
 
             // pro only
             //BatchJob.StartNew(x =>

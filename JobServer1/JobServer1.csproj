@@ -16,4 +16,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="BackgroundJobTest.Core">
+      <HintPath>..\BackgroundJobTest\BackgroundJobTest.Core\bin\Debug\netstandard2.0\BackgroundJobTest.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
